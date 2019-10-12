@@ -1,0 +1,9 @@
+MainViewData = MainViewData or BaseClass()
+
+function MainViewData:Ctor()
+
+end
+
+function MainViewData:Dtor()
+
+end

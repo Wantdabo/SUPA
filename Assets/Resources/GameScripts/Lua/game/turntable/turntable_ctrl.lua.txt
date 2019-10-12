@@ -1,0 +1,13 @@
+require("game/turntable/turntable_view")
+require("game/turntable/turntable_data")
+
+TurntableCtrl = TurntableCtrl or BaseClass(BaseCtrl)
+
+function TurntableCtrl:Ctor()
+	self.view = TurntableView.New(View.TurntableView)
+	self.data = TurntableData.New()
+end
+
+function TurntableCtrl:Dtor()
+
+end

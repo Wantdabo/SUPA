@@ -1,0 +1,100 @@
+BaseView = BaseView or BaseClass()
+
+function BaseView:Ctor(obj, ...)
+	if ... ~= nil then
+		ViewManager:RegisterView(obj, ...)
+	end
+end
+
+function BaseView:Load(asset_box)
+	self.prefab = Instantiate(asset_box.obj)
+	Utils:SetParent(UIRoot, self.prefab)
+
+	self.variables = self.prefab.transform:GetComponent(typeof(VariableTable)).Variables
+	self.canvas_scaler = self.prefab.transform:GetComponent(typeof(CanvasScaler))
+	self.canvas_group = self.prefab.transform:GetComponent(typeof(CanvasGroup))
+	for k, v in pairs(self.variables) do
+		self[k] = v
+	end
+	self:LoadCallBack()
+	self:Open()
+end
+
+function BaseView:Release()
+	if self.destroy_timer ~= nil then
+		Utils:RemoveTimer(self.destroy_timer)
+		self.destroy_timer = nil
+	end
+
+	Destroy(self.prefab)
+	self.prefab = nil
+
+	for k, v in pairs(self.variables) do
+		self[k] = nil
+	end
+	self:ReleaseCallBack()
+end
+
+function BaseView:Open(view_name)
+	if view_name ~= nil then self.view_name = view_name end
+
+	if self.destroy_timer ~= nil then
+		Utils:RemoveTimer(self.destroy_timer)
+		self.destroy_timer = nil
+	end
+
+	if self.prefab == nil and self.view_name ~= nil then
+		AssetLoader:LoadAsset(self.view_name, function(asset_box)
+			self:Load(asset_box)
+		end)
+	else
+		Utils:SetActive(self.prefab, true)
+		self:OpenEffect()
+		self:OpenCallBack()
+	end
+end
+
+function BaseView:Close()
+	self:CloseEffect(function()
+		if self.prefab ~= nil then
+			Utils:SetActive(self.prefab, false)
+			if self.destroy_timer == nil then
+				self.destroy_timer = Utils:AddTimer(SysEnum.DestroyView, function() self:Release() end)
+			end
+		end
+	end)
+	self:CloseCallBack()
+end
+
+function BaseView:Flush()
+	self:OnFlush()
+end
+
+function BaseView:OpenEffect(callback)
+	Utils:TweenValue(function(value)
+		self.canvas_scaler.scaleFactor = value
+		self.canvas_group.alpha = value
+	end, 0, 1, 0.3, callback)
+end
+
+function BaseView:CloseEffect(callback)
+	Utils:TweenValue(function(value)
+		self.canvas_scaler.scaleFactor = value
+		self.canvas_group.alpha = value
+	end, 1, 0, 0.3, callback)
+end
+
+function BaseView:LoadCallBack()
+end
+
+function BaseView:ReleaseCallBack()
+end
+
+function BaseView:OpenCallBack()
+end
+
+function BaseView:CloseCallBack()
+end
+
+function BaseView:OnFlush()
+end

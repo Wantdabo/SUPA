@@ -1,0 +1,28 @@
+﻿
+
+<linker>
+
+	<assembly fullname="UnityEngine.CoreModule">
+	    <type fullname="UnityEngine.Object" preserve="all"/>
+		<type fullname="UnityEngine.GameObject" preserve="all"/>
+		<type fullname="UnityEngine.Vector2" preserve="all"/>
+		<type fullname="UnityEngine.Vector3" preserve="all"/>
+		<type fullname="UnityEngine.Color" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="UnityEngine.AudioModule">
+	    <type fullname="UnityEngine.AudioSource" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="Assembly-CSharp">
+	    <type fullname="Main" preserve="all"/>
+		<type fullname="AssetLoader" preserve="all"/>
+		<type fullname="SceneLoader" preserve="all"/>
+		<type fullname="Timer" preserve="all"/>
+		<type fullname="Log" preserve="all"/>
+		
+	</assembly>
+
+</linker>

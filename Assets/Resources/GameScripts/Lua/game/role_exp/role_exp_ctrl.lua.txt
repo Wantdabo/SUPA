@@ -1,0 +1,13 @@
+require("game/role_exp/role_exp_view")
+require("game/role_exp/role_exp_data")
+
+RoleExpCtrl = RoleExpCtrl or BaseClass(BaseCtrl)
+
+function RoleExpCtrl:Ctor()
+	self.view = RoleExpView.New(View.RoleExpView)
+	self.data = RoleExpData.New()
+end
+
+function RoleExpCtrl:Dtor()
+
+end

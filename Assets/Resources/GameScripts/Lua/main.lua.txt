@@ -1,0 +1,59 @@
+GameObject = CS.UnityEngine.GameObject
+Vector2 = CS.UnityEngine.Vector2
+Vector3 = CS.UnityEngine.Vector3
+Color = CS.UnityEngine.Color
+AudioSource = CS.UnityEngine.AudioSource
+CanvasGroup = CS.UnityEngine.CanvasGroup
+CanvasScaler = CS.UnityEngine.UI.CanvasScaler
+
+VariableTable = CS.VariableTable
+
+Main = CS.Main.Instance
+AssetLoader = CS.AssetLoader.Instance
+SceneLoader = CS.SceneLoader.Instance
+Timer = CS.Timer
+Log = CS.Log.Instance
+
+UIRoot = Main.uiRoot
+UISound = Main.uiSound
+
+require("common/event_define")
+require("common/view_define")
+require("common/sound_define")
+require("common/scene_define")
+require("common/game_enum")
+
+require("common/base_class")
+require("common/utils")
+require("common/clock")
+require("common/functions")
+require("common/base_ctrl")
+require("common/base_view")
+
+function Start()
+	LoadGameCtrl()
+	ViewManager:Open(View.MainView)
+end
+
+function LoadGameCtrl()
+	local require_list = require("require_list")
+	for _, v in ipairs(require_list) do
+		require(v)
+	end
+
+	Utils.New()
+	Clock.New()
+	EventManager.New()
+	ViewManager.New()
+	SoundManager.New()
+	SceneManager.New()
+
+	LoadingCtrl.New()
+	MainViewCtrl.New()
+	RoleExpCtrl.New()
+	TurntableCtrl.New()
+end
+
+function HandleEvent(event)
+	EventManager:Fire(event.eventID, event)
+end

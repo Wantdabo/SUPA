@@ -1,0 +1,42 @@
+Utils = Utils or BaseClass()
+
+function Utils:Ctor()
+	self.utils = CS.Utils
+	self.vector3 = Vector3.zero
+end
+
+function Utils:Dtor()
+	self.utils = nil
+	self.vector3 = nil
+end
+
+function Utils:SetActive(obj, active)
+	obj.gameObject:SetActive(active)
+end
+
+function Utils:SetParent(parent, child)
+    child.transform:SetParent(parent.transform)
+end
+
+function Utils:SetLocalPosition(obj, pos)
+	self.vector3:Set(pos[1], pos[2], pos[3])
+	obj.transform.localPosition = self.vector3
+end
+
+function Utils:SetWorldPosition(obj, pos)
+	self.vector3:Set(pos[1], pos[2], pos[3])
+	obj.transform.Position = self.vector3
+end
+
+function Utils:AddTimer(interval, callback, loop, update)
+	loop = loop or false
+	return Timer.Register(interval, callback, loop, update)
+end
+
+function Utils:RemoveTimer(timer)
+	timer:Cancel()
+end
+
+function Utils:TweenValue(callback, start_value, end_value, duration, complete)
+	self.utils.TweenValue(callback, start_value, end_value, duration, complete)
+end

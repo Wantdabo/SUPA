@@ -1,0 +1,14 @@
+local require_list = {
+	"common/event_manager",
+	"common/view_manager",
+	"common/sound_manager",
+	"common/scene_manager",
+	"common/config_manager",
+
+	"game/loading/loading_ctrl",
+	"game/main_view/main_view_ctrl",
+	"game/role_exp/role_exp_ctrl",
+	"game/turntable/turntable_ctrl"
+}
+
+return require_list

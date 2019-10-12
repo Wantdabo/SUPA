@@ -1,0 +1,5 @@
+Sound = {
+	ClickButton = "sounds_clickbutton@prefab",
+	OpenView = "sounds_openview@prefab",
+	CloseView = "sounds_closeview@prefab",
+}

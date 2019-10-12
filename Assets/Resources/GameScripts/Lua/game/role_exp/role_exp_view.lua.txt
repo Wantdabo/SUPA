@@ -1,0 +1,37 @@
+RoleExpView = RoleExpView or BaseClass(BaseView)
+
+function RoleExpView:Ctor()
+end
+
+function RoleExpView:Dtor()
+end
+
+function RoleExpView:LoadCallBack()
+	self.role_exp_handle_event = EventManager:Add(Event.ROLE_EXP_HANDLE, function(event) self:RoleExpHandle(event.eventKey) end)
+end
+
+function RoleExpView:OpenCallBack()
+	self:Flush()
+end
+
+function RoleExpView:OnFlush()
+
+end
+
+function RoleExpView:RoleExpHandle(param)
+	SoundManager:Play(Sound.ClickButton, {unique = true, sound_type = SysEnum.SoundType.UI})
+	local key = tonumber(param)
+	if key == 1 then
+		self.role_exp_slider.value = self.role_exp_slider.value + 0.1
+	else
+		self.role_exp_slider.value = self.role_exp_slider.value - 0.1
+	end
+end
+
+function RoleExpView:ReleaseCallBack()
+	EventManager:Remove(self.role_exp_handle_event)
+	self.role_exp_handle_event = nil
+end
+
+function RoleExpView:CloseCallBack()
+end

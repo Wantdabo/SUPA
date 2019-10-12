@@ -1,0 +1,9 @@
+TurntableData = TurntableData or BaseClass()
+
+function TurntableData:Ctor()
+
+end
+
+function TurntableData:Dtor()
+
+end

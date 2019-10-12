@@ -1,0 +1,35 @@
+ViewManager = ViewManager or BaseClass()
+
+function ViewManager:Ctor()
+	self.view_list = {}
+	self.open_view_event = EventManager:Add(Event.OPEN_VIEW, function(event) ViewManager:Open(View[event.eventKey]) end)
+	self.close_view_event =  EventManager:Add(Event.CLOSE_VIEW, function(event) ViewManager:Close(View[event.eventKey]) end)
+end
+
+function ViewManager:Dtor()
+	EventManager:Remove(self.open_view_event)
+	EventManager:Remove(self.close_view_event)
+	self.view_list = nil
+	self.open_view_event = nil
+	self.close_view_event = nil
+end
+
+function ViewManager:RegisterView(view, view_name)
+	if self.view_list[view_name] == nil then
+		self.view_list[view_name] = view
+	end
+end
+
+function ViewManager:Open(view_name)
+	SoundManager:Play(Sound.OpenView, {unique = true, sound_type = SysEnum.SoundType.UI})
+	if self.view_list[view_name] then
+		self.view_list[view_name]:Open(view_name)
+	end
+end
+
+function ViewManager:Close(view_name)
+	SoundManager:Play(Sound.CloseView, {unique = true, sound_type = SysEnum.SoundType.UI})
+	if self.view_list[view_name] then
+		self.view_list[view_name]:Close()
+	end
+end

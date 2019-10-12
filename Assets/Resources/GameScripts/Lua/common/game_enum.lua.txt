@@ -1,0 +1,20 @@
+SysEnum = {
+	DestroyView = 5,
+
+	SoundType = {
+		UI = "UI",
+		Scene = "Scene"		
+	},
+
+	ClockType = {
+		YMD = "YMD",
+		DHMS = "DHMS",
+		HMS = "HMS"
+	}
+}
+
+GameEnum = {
+	Config = {
+	},
+}
+

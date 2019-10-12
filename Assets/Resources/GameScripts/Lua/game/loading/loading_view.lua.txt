@@ -1,0 +1,44 @@
+LoadingView = LoadingView or BaseClass(BaseView)
+
+function LoadingView:Ctor()
+end
+
+function LoadingView:Dtor()
+end
+
+function LoadingView:LoadCallBack()
+
+end
+
+function LoadingView:OpenCallBack()
+end
+
+function LoadingView:OnFlush()
+
+end
+
+function LoadingView:ReleaseCallBack()
+
+end
+
+function LoadingView:UpdateProgress(progress)
+	self.loading_slider.value = progress
+	self.progress_lbl.text = progress * 100 .. "%"
+end
+
+-- override open effect
+function LoadingView:OpenEffect(callback)
+	if callback ~= nil then
+		callback()
+	end
+end
+
+-- override open effect
+function LoadingView:CloseEffect(callback)
+	if callback ~= nil then
+		callback()
+	end
+end
+
+function LoadingView:CloseCallBack()
+end

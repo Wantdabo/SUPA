@@ -1,0 +1,19 @@
+require("game/loading/loading_view")
+require("game/loading/loading_data")
+
+LoadingCtrl = LoadingCtrl or BaseClass(BaseCtrl)
+
+function LoadingCtrl:Ctor()
+	self.view = LoadingView.New(View.LoadingView)
+	self.data = LoadingData.New()
+end
+
+function LoadingCtrl:Dtor()
+
+end
+
+function LoadingCtrl:UpdateProgress(progress)
+	progress = progress >= 0.89 and 1 or progress
+	
+	self.view:UpdateProgress(progress)
+end

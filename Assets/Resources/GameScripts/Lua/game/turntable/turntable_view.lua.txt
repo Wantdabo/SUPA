@@ -1,0 +1,47 @@
+TurntableView = TurntableView or BaseClass(BaseView)
+
+function TurntableView:Ctor()
+end
+
+function TurntableView:Dtor()
+end
+
+function TurntableView:LoadCallBack()
+	self.angles = {70, 25, -25, -70, -115, -160, -200, -245}
+	self.is_playing = false
+	self.turntable_draw_event = EventManager:Add(Event.TURNTABLE_DRAW, function(event) self:TurntableDraw(event.eventKey) end)
+	self.turntable_draw_complete_event = EventManager:Add(Event.TURNTABLE_DRAW_COMPLETE, function(event) self:TurntableDrawComplete(event.eventKey) end)
+end
+
+function TurntableView:OpenCallBack()
+end
+
+function TurntableView:OnFlush()
+
+end
+
+function TurntableView:TurntableDraw(param)
+	if self.is_playing then return end
+	self.is_playing = true
+
+	local angle = math.random(1, 8)
+	self.pointer_anim.endValueV3 = Vector3(0, 0, -360 * 5 + self.angles[angle])
+	self.pointer_anim:RePlay()
+end
+
+function TurntableView:TurntableDrawComplete(param)
+	self.is_playing = false
+end
+
+function TurntableView:ReleaseCallBack()
+	EventManager:Remove(self.turntable_draw_event)
+	EventManager:Remove(self.turntable_draw_complete_event)
+
+	self.turntable_draw_event = nil
+	self.turntable_draw_complete_event = nil
+	self.angles = nil
+	self.is_playing = nil
+end
+
+function TurntableView:CloseCallBack()
+end

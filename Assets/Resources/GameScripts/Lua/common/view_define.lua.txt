@@ -1,0 +1,6 @@
+View = {
+	LoadingView = "views_main_loadingview@prefab",
+	MainView = "views_main_mainview@prefab",
+	RoleExpView = "views_main_roleexpview@prefab",
+	TurntableView = "views_main_turntableview@prefab",
+}

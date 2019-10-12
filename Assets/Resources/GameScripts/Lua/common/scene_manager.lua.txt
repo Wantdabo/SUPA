@@ -1,0 +1,28 @@
+SceneManager = SceneManager or BaseClass()
+
+function SceneManager:Ctor()
+	self.pre_scene = ""
+	self.cur_scene = ""
+end
+
+function SceneManager:Dtor()
+	self.pre_scene = nil
+	self.cur_scene = nil
+end
+
+function SceneManager:LoadScene(scene_name)
+	if scene_name == self.cur_scene then return end
+	
+	ViewManager:Open(View.LoadingView)
+	SceneLoader:LoadScene(scene_name, Scene.MAPPING[scene_name], function(progress) self:OnUpdate(progress) end, function() self:OnComplete(scene_name) end)
+end
+
+function SceneManager:OnUpdate(progress)
+	LoadingCtrl:UpdateProgress(progress)
+end
+
+function SceneManager:OnComplete(scene_name)
+	self.pre_scene = self.cur_scene
+	self.cur_scene = scene_name
+	ViewManager:Close(View.LoadingView)
+end

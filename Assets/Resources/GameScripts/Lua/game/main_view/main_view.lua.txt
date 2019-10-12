@@ -1,0 +1,40 @@
+MainView = MainView or BaseClass(BaseView)
+
+function MainView:Ctor()
+
+end
+
+function MainView:LoadCallBack()
+	self.load_scene_demo_event =  EventManager:Add(Event.LOAD_SCENE, function(event) self:LoadScene(event.eventKey) end)
+end
+
+function MainView:OpenCallBack()
+	self.cur_time = Clock:LocalTime()
+	self.cur_time_timer = Utils:AddTimer(1, function()
+		self.cur_time = self.cur_time + 1
+		self.cur_time_lbl.text = self.cur_time
+	end, true)
+end
+
+function MainView:OnFlush()
+
+end
+
+function MainView:ReleaseCallBack()
+	if self.load_scene_demo_event ~= nil then
+		EventManager:Remove(self.load_scene_demo_event)
+	end
+	self.load_scene_demo_event = nil
+end
+
+function MainView:LoadScene(param)
+	SceneManager:LoadScene(param)
+end
+
+function MainView:CloseCallBack()
+	if self.cur_time_timer ~= nil then
+		Utils:RemoveTimer(self.cur_time_timer)
+	end
+	self.cur_time_timer = nil
+	self.cur_time = nil
+end

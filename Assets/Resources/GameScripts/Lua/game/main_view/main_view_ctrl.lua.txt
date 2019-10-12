@@ -1,0 +1,13 @@
+require("game/main_view/main_view")
+require("game/main_view/main_view_data")
+
+MainViewCtrl = MainViewCtrl or BaseClass(BaseCtrl)
+
+function MainViewCtrl:Ctor()
+	self.view = MainView.New(View.MainView)
+	self.data = MainViewData.New()
+end
+
+function MainViewCtrl:Dtor()
+
+end

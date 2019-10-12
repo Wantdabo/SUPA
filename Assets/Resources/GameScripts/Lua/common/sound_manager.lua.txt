@@ -1,0 +1,91 @@
+SoundManager = SoundManager or BaseClass()
+
+function SoundManager:Ctor()
+	self.sound_list = {}
+	self.unique_sound_list = {}
+	self.recycle_timer = Utils:AddTimer(1, function() self:Recycle() end, true)
+end
+
+function SoundManager:Dtor()
+	if self.recycle_timer ~= nil then
+		Utils:RemoveTimer(self.recycle_timer)
+	end
+	self.sound_list = nil
+	self.unique_sound_list = nil
+	self.recycle_timer = nil
+end
+
+function SoundManager:Play(sound_name, params)
+	if params.unique then
+		local sound_id = self:GetUniqueSoundID(sound_name)
+		if sound_id ~= nil then
+			self.unique_sound_list[sound_id].audio:Play()
+			return
+		end
+	end
+
+	AssetLoader:LoadAsset(sound_name, function(asset_box)
+		self:Resolve(asset_box, sound_name, params)
+	end)
+end
+
+function SoundManager:Resolve(asset_box, sound_name, params)
+	local sound = {}
+	sound.prefab = Instantiate(asset_box.obj)
+	sound.audio = sound.prefab.transform:GetComponent(typeof(AudioSource))
+	sound.sound_name = sound_name
+	sound.sound_type = params.sound_type
+	sound.unique = params.unique or false
+	sound.loop = params.loop or false
+	sound.stay = params.stay or false
+	sound.world_pos = params.world_pos or {0, 0, 0}
+
+	self:HandleSound(sound)
+end
+
+function SoundManager:HandleSound(sound)
+	if sound.unique then
+		self.unique_sound_list[#self.unique_sound_list + 1] = sound
+	else
+		self.sound_list[#self.sound_list + 1] = sound
+	end
+
+	if sound.sound_type == SysEnum.SoundType.UI then
+		Utils:SetParent(UISound, sound.prefab)
+	elseif sound.sound_type == SysEnum.SoundType.Scene then
+		Utils:SetWorldPosition(sound.prefab, sound.world_pos)
+	end
+
+	sound.audio.loop = sound.loop
+	sound.audio:Play()
+end
+
+function SoundManager:GetUniqueSound(sound_name)
+	local sound_id = self:GetUniqueSoundID(sound_name)
+	if sound_id ~= nil then
+		return self.unique_sound_list[sound_id]
+	end
+end
+
+function SoundManager:RemoveUniqueSound(sound_name)
+	local sound_id = self:GetUniqueSoundID(sound_name)
+	if sound_id ~= nil then
+		Destroy(self.unique_sound_list[sound_id].prefab)
+		table.remove(self.unique_sound_list, sound_id)
+	end
+end
+
+function SoundManager:GetUniqueSoundID(sound_name)
+	for k, v in ipairs(self.unique_sound_list) do
+		if sound_name == v.sound_name then return k end
+	end
+end
+
+function SoundManager:Recycle()
+	for k, v in ipairs(self.sound_list) do
+		if not v.audio.isPlaying and not v.loop then
+			Destroy(v.prefab)
+			table.remove(self.sound_list, k)
+		end
+	end
+end

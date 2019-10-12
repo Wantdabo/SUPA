@@ -1,0 +1,17 @@
+Config = Config or BaseClass()
+
+function Config:Ctor()
+	self.config_list = {}
+end
+
+function Config:Dtor()
+	self.config_list = nil
+end
+
+function Config:Get(config_name)
+	if self.config_list[config_name] == nil then
+		self.config_list[config_name] = require(config_name)
+	end
+
+	return self.config_list[config_name]
+end

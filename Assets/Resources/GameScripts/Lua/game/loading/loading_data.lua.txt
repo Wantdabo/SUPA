@@ -1,0 +1,9 @@
+LoadingData = LoadingData or BaseClass()
+
+function LoadingData:Ctor()
+
+end
+
+function LoadingData:Dtor()
+
+end

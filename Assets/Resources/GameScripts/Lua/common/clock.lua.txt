@@ -1,0 +1,53 @@
+Clock = Clock or BaseClass()
+
+function Clock:Ctor()
+	self.convert_funcs = {
+		[SysEnum.ClockType.YMD] = self.YMD,
+		[SysEnum.ClockType.DHMS] = self.DHMS,
+		[SysEnum.ClockType.HMS] = self.HMS
+	}
+end
+
+function Clock:Dtor()
+	self.convert_funcs = nil
+end
+
+function Clock:LocalTime()
+	return os.time()
+end
+
+function Clock:ConvertTime(seconds, convert_type)
+	return self.convert_funcs[convert_type](seconds)
+end
+
+function Clock.DHMS(seconds)
+	local time = Clock.GetTime(seconds)
+end
+
+function Clock.HMS(seconds)
+	local time = Clock.GetTime(seconds)
+
+	return Clock.FullText(time.hour) .. ":" .. Clock.FullText(time.min) .. ":" .. Clock.FullText(time.sec)
+end
+
+function Clock.YMD(seconds)
+
+end
+
+function Clock.GetTime(seconds)
+	local time = {}
+	time.day = math.floor(seconds / 3600 * 24)
+    time.hour = math.floor(seconds / 3600)
+    time.min = math.floor((seconds - time.hour * 3600) / 60)
+    time.sec = seconds - time.hour * 3600 - time.min * 60
+
+    return time
+end
+
+function Clock.FullText(num)
+	if num <= 9 then
+		return "0" .. num
+	end
+
+	return num
+end
