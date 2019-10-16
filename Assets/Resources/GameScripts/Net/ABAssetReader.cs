@@ -19,12 +19,7 @@ public class ABAssetReader : AssetReader
             return Get(_assetBundleName);
 
         assetBundle = AssetBundle.LoadFromFile(GlobalValues.GET_AB_LOAD_PATH + _assetBundleName);
-        assetBox.name = Utils.AssetBundleNameToAssetName(assetBundle.name);
-        assetBox.assetBundleName = assetBundle.name;
-        assetBox.assetBundle = assetBundle;
-        if (!assetBundle.isStreamedSceneAssetBundle)
-            assetBox.obj = assetBundle.LoadAsset(assetBox.name);
-        Add(assetBox);
+        SetAssetBox(assetBundle);
 
         return assetBox;
     }
@@ -57,15 +52,8 @@ public class ABAssetReader : AssetReader
     {
         _ao.completed -= LoadAsyncFinishUnpack;
         assetBundleCreateRequest = _ao as AssetBundleCreateRequest;
-
         assetBundle = assetBundleCreateRequest.assetBundle;
-        assetBox.name = Utils.AssetBundleNameToAssetName(assetBundle.name);
-        assetBox.assetBundleName = assetBundle.name;
-        assetBox.assetBundle = assetBundle;
-        if (!assetBundle.isStreamedSceneAssetBundle)
-            assetBox.obj = assetBundle.LoadAsset(assetBox.name);
-        Add(assetBox);
-
+        SetAssetBox(assetBundle);
         LoadAsyncFinishNotice(assetBox);
     }
 
@@ -78,5 +66,15 @@ public class ABAssetReader : AssetReader
         {
             even(_assetBox);
         }
+    }
+
+    private void SetAssetBox(AssetBundle _assetBundle)
+    {
+        assetBox.name = Utils.AssetBundleNameToAssetName(_assetBundle.name);
+        assetBox.assetBundleName = _assetBundle.name;
+        assetBox.assetBundle = _assetBundle;
+        if (!assetBundle.isStreamedSceneAssetBundle)
+            assetBox.obj = _assetBundle.LoadAsset(assetBox.name);
+        Add(assetBox);
     }
 }

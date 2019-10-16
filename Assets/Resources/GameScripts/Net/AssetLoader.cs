@@ -6,7 +6,6 @@ public class AssetLoader
 {
     private static AssetLoader assetLoader;
     private AssetReader assetReader;
-    private AssetBox assetBox;
     private string[] deps;
 
     public static AssetLoader Instance
