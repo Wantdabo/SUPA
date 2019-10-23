@@ -45,6 +45,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1195858604563510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224442967592808432}
+  - component: {fileID: 114169878837310026}
+  m_Layer: 5
+  m_Name: cell_grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1551238343004588
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +331,29 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114169878837310026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195858604563510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 10}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!114 &114222850130993366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +370,15 @@ MonoBehaviour:
     type: 0
     component: {fileID: 114363217642632868}
     gameObject: {fileID: 0}
+  - name: cell_grid
+    type: 1
+    component: {fileID: 114363217642632868}
+    gameObject: {fileID: 1195858604563510}
+  - name: cell_org
+    type: 1
+    component: {fileID: 114363217642632868}
+    gameObject: {fileID: 1062800309556386, guid: 6d37320924cc2d949906687e024031a8,
+      type: 2}
 --- !u!114 &114347917303188466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,7 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventID: LOAD_SCENE
-  eventKey: NoobCamp
+  eventKey: Noobcamp
 --- !u!114 &114995290645384630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -917,6 +965,7 @@ RectTransform:
   - {fileID: 224973661083464546}
   - {fileID: 224275254126140816}
   - {fileID: 224738331330614326}
+  - {fileID: 224442967592808432}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -961,6 +1010,24 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 150, y: 20}
   m_SizeDelta: {x: 300, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224442967592808432
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195858604563510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224156486247299100}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -55, y: 0}
+  m_SizeDelta: {x: 110, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224482308448785198
 RectTransform:

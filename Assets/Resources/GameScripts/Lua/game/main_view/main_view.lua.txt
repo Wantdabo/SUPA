@@ -14,10 +14,17 @@ function MainView:OpenCallBack()
 		self.cur_time = self.cur_time + 1
 		self.cur_time_lbl.text = self.cur_time
 	end, true)
+
+	self:Flush()
 end
 
 function MainView:OnFlush()
-
+	-- 先这样写，抽空增加 Cell 类
+	local cell_obj
+	for i = 1, 5 do
+		cell_obj = Instantiate(self.cell_org)
+		Utils:SetParent(self.cell_grid, cell_obj)
+	end
 end
 
 function MainView:ReleaseCallBack()
