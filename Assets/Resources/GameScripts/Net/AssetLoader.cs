@@ -41,7 +41,7 @@ public class AssetLoader
         {
             bool loaded = false;
             bool canLoad;
-            foreach (string dep in assetReader.GetDependences(_assetBundleName))
+            foreach (string dep in deps)
             {
                 assetReader.LoadAsync(dep, (AssetBox _assetBox) =>
                 {
