@@ -1,0 +1,44 @@
+BaseUI = BaseUI or BaseClass()
+
+function BaseUI:HandleUI(asset_box, callback)
+	self.prefab = Instantiate(asset_box.obj)
+	self.variables = self.prefab.transform:GetComponent(typeof(VariableTable)).Variables
+	for k, v in pairs(self.variables) do
+		self[k] = v
+	end
+	self:HandleUICallBack(callback)
+end
+
+function BaseUI:HandleUICallBack()
+end
+
+function BaseUI:Load(asset_name, callback)
+	AssetLoader:LoadAsset(self.view_name, function(asset_box)
+		self:HandleUI(asset_box, callback)
+	end)
+end
+
+function BaseUI:Release()
+	Destroy(self.prefab)
+	self.prefab = nil
+	for k, v in pairs(self.variables) do
+		self[k] = nil
+	end
+	self:ReleaseCallBack()
+end
+
+function BaseUI:Flush()
+	self:OnFlush()
+end
+
+function BaseUI:LoadCallBack()
+end
+
+function BaseUI:ReleaseCallBack()
+end
+
+function BaseUI:OpenCallBack()
+end
+
+function BaseUI:OnFlush()
+end
