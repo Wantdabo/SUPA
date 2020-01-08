@@ -14,23 +14,23 @@ public abstract class AssetReader
     public AssetBox assetBox;
 
     /// <summary>
-    /// Load Resource By Async 
+    /// 异步加载，子类实现。
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
-    /// <param name="_callback">Load Finish CallBack.</param>
+    /// <param name="_callback">加载完成后的回调。</param>
     public abstract void LoadAsync(string _assetBundleName, EVENT_DEL_VOID_ASSETBOX _callback);
 
     /// <summary>
-    /// Load Resouce By Sync
+    /// 同步加载，子类实现。
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
     /// <returns>AssetBox.</returns>
     public abstract AssetBox LoadSync(string _assetBundleName);
 
     /// <summary>
-    /// Get AssetBundle with Manifest.
+    /// 获取包含 Manifest 的 AssetBundle.
     /// </summary>
-    /// <returns>AssetBundle with Manifest.</returns>
+    /// <returns>AssetBundle.</returns>
     public AssetBundle GetManifestAssetBundle()
     {
         if (maniAssetBundle == null)
@@ -40,7 +40,7 @@ public abstract class AssetReader
     }
 
     /// <summary>
-    /// Get AssetBundleManifest.
+    /// 获取 AssetBundleManifest.
     /// </summary>
     /// <returns>AssetBundleManifest.</returns>
     public AssetBundleManifest GetManifest()
@@ -54,10 +54,10 @@ public abstract class AssetReader
     }
 
     /// <summary>
-    /// Get Dependences By AssetBundleName.
+    /// 根据 AssetBundleName 获取资源的依赖关系
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
-    /// <returns>Dependences.</returns>
+    /// <returns>依赖关系。</returns>
     public string[] GetDependences(string _assetBundleName)
     {
         return GetManifest().GetAllDependencies(_assetBundleName);

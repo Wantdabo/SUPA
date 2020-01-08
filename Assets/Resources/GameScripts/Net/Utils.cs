@@ -10,12 +10,12 @@ public class Utils
     private static string extends = "";
 
     /// <summary>
-    /// Compare String.
+    /// 字符串对比。
     /// </summary>
-    /// <param name="_a">Left Value.</param>
-    /// <param name="_b">Right Value.</param>
-    /// <param name="ignore">Ignore Case.</param>
-    /// <returns>Compare Result</returns>
+    /// <param name="_a">字符串 A.</param>
+    /// <param name="_b">字符串 B.</param>
+    /// <param name="ignore">是否忽略大小写。</param>
+    /// <returns>布尔值结果</returns>
     public static bool CompareStr(string _a, string _b, bool _ignore = false)
     {
         if (_ignore)
@@ -25,11 +25,11 @@ public class Utils
     }
 
     /// <summary>
-    /// Copy File To Target Path.
+    /// 拷贝文件至目标地址。
     /// </summary>
-    /// <param name="_sourcePath">Source Path.</param>
-    /// <param name="_targetPath">Target Path.</param>
-    /// <param name="overwrite">Overwrite. Default False.</param>
+    /// <param name="_sourcePath">源文件地址。</param>
+    /// <param name="_targetPath">目标文件地址。</param>
+    /// <param name="overwrite">如果存在是否重写。</param>
     public static void CopyFile(string _sourcePath, string _targetPath, bool overwrite = false)
     {
         FileInfo fileInfo = new FileInfo(_sourcePath);
@@ -37,11 +37,11 @@ public class Utils
     }
 
     /// <summary>
-    /// Copy Files to Target Floor.
+    /// 将目录中的文件拷贝至目标目录。
     /// </summary>
-    /// <param name="_sourceFloor">Source Floor.</param>
-    /// <param name="_targetFloor">Target Floor.</param>
-    /// <param name="overwrite">Overwrite. Default False.</param>
+    /// <param name="_sourceFloor">源文件目录。</param>
+    /// <param name="_targetFloor">目标目录。</param>
+    /// <param name="overwrite">如果存在是否重写。</param>
     public static void CopyFiles(string _sourceFloor, string _targetFloor, bool overwrite = false)
     {
         DirectoryInfo di = new DirectoryInfo(_sourceFloor);
@@ -51,9 +51,9 @@ public class Utils
     }
 
     /// <summary>
-    /// Delete File.
+    /// 删除某个文件。
     /// </summary>
-    /// <param name="_sourcePath">Source Path.</param>
+    /// <param name="_sourcePath">文件地址。</param>
     public static void DelFile(string _sourcePath)
     {
         FileInfo fileInfo = new FileInfo(_sourcePath);
@@ -61,10 +61,10 @@ public class Utils
     }
 
     /// <summary>
-    /// Delete Files By Name.
+    /// 删除目录中包含指定字符串的文件。
     /// </summary>
-    /// <param name="_sourceFloor">Source Floor.</param>
-    /// <param name="_fileName">File Name.</param>
+    /// <param name="_sourceFloor">目录地址。</param>
+    /// <param name="_fileName">字符串。</param>
     public static void DelFilesByName(string _sourceFloor, string _fileName)
     {
         DirectoryInfo di = new DirectoryInfo(_sourceFloor);
@@ -77,10 +77,10 @@ public class Utils
     }
 
     /// <summary>
-    /// Delete Files By Extends.
+    /// 删除指定目录，指定扩展名的文件。
     /// </summary>
-    /// <param name="_sourceFloor">Source Floor.</param>
-    /// <param name="_extends">Extends.</param>
+    /// <param name="_sourceFloor">目录地址。</param>
+    /// <param name="_extends">扩展名。</param>
     public static void DelFilesByExtends(string _sourceFloor, string _extends)
     {
         DirectoryInfo di = new DirectoryInfo(_sourceFloor);
@@ -92,9 +92,9 @@ public class Utils
     }
 
     /// <summary>
-    /// Get AssetBundleName By Path.
+    /// 根据文件地址获取 AssetBundleName.
     /// </summary>
-    /// <param name="_path">Path.</param>
+    /// <param name="_path">地址。</param>
     /// <returns>AssetBundleName.</returns>
     public static string PathToAssetBundleName(string _path)
     {
@@ -104,7 +104,7 @@ public class Utils
     }
 
     /// <summary>
-    /// AssetBundleName To AssetName.
+    /// 根据 AssetBundleName 获取 AssetName.
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
     /// <returns>AssetName.</returns>
@@ -116,23 +116,23 @@ public class Utils
     }
 
     /// <summary>
-    /// AssetBundleName To Path.
+    /// 根据 AssetBundleName 获取文件的地址。
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
-    /// <returns>Path.</returns>
+    /// <returns>文件地址.</returns>
     public static string AssetBundleNameToPath(string _assetBundleName)
     {
         return GlobalValues.PATH_PREFAB_BUNDLE + _assetBundleName.Replace("_", "/").Replace("@", ".");
     }
 
     /// <summary>
-    /// TweenValue.
+    /// 补间值方法。
     /// </summary>
-    /// <param name="_callback">Tween Update Callback.</param>
-    /// <param name="_startValue">Tween Start Value.</param>
-    /// <param name="_endValue">Tween End Value.</param>
-    /// <param name="_duration">Tween Duration.</param>
-    /// <param name="_onComplete">OnComplete Callback.</param>
+    /// <param name="_callback">补间期间的回调。</param>
+    /// <param name="_startValue">起始值。</param>
+    /// <param name="_endValue">结束值。</param>
+    /// <param name="_duration">补间的时间长度。</param>
+    /// <param name="_onComplete">补间结束的回调。</param>
     public static void TweenValue(EVENT_DEL_VOID_FLOAT _callback, float _startValue, float _endValue, float _duration, TweenCallback _onComplete = null)
     {
         Tweener tw = DOTween.To((value) => { _callback(value);}, _startValue, _endValue, _duration);

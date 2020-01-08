@@ -44,20 +44,19 @@ public class ABAssetReader : AssetReader
             waitingDict.Add(_assetBundleName, eventList);
 
             assetBundleCreateRequest = AssetBundle.LoadFromFileAsync(GlobalValues.GET_AB_LOAD_PATH + _assetBundleName);
-            assetBundleCreateRequest.completed += LoadAsyncFinishUnpack;
+            assetBundleCreateRequest.completed += LoadAsyncHandle;
         }
     }
 
-    public void LoadAsyncFinishUnpack(AsyncOperation _ao)
+    public void LoadAsyncHandle(AsyncOperation _ao)
     {
-        _ao.completed -= LoadAsyncFinishUnpack;
+        _ao.completed -= LoadAsyncHandle;
         assetBundleCreateRequest = _ao as AssetBundleCreateRequest;
         assetBundle = assetBundleCreateRequest.assetBundle;
-        SetAssetBox(assetBundle);
-        LoadAsyncFinishNotice(assetBox);
+        LoadAsyncNotice(SetAssetBox(assetBundle));
     }
 
-    public void LoadAsyncFinishNotice(AssetBox _assetBox)
+    public void LoadAsyncNotice(AssetBox _assetBox)
     {
         eventList = waitingDict[_assetBox.assetBundleName];
         waitingDict.Remove(_assetBox.assetBundleName);
@@ -66,9 +65,10 @@ public class ABAssetReader : AssetReader
         {
             even(_assetBox);
         }
+        eventList = null;
     }
 
-    private void SetAssetBox(AssetBundle _assetBundle)
+    private AssetBox SetAssetBox(AssetBundle _assetBundle)
     {
         assetBox.name = Utils.AssetBundleNameToAssetName(_assetBundle.name);
         assetBox.assetBundleName = _assetBundle.name;
@@ -76,5 +76,7 @@ public class ABAssetReader : AssetReader
         if (!assetBundle.isStreamedSceneAssetBundle)
             assetBox.obj = _assetBundle.LoadAsset(assetBox.name);
         Add(assetBox);
+
+        return assetBox;
     }
 }

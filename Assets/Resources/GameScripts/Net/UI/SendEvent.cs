@@ -8,12 +8,8 @@ public class SendEvent : MonoBehaviour
     public string eventID;
     [SerializeField]
     public string eventKey;
-
-    private EventBox eventBox;
-
+    
     public void Send() {
-        eventBox.eventID = eventID;
-        eventBox.eventKey = eventKey;
-        Lua.Instance.SendEvent(eventBox);
+        Lua.Instance.SendEvent(eventID, eventKey);
     }
 }

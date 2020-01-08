@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using Object = UnityEngine.Object;
 
 // 2019-9-25
-// FORM : https://github.com/akbiggs/UnityTimer/releases
+// FROM : https://github.com/akbiggs/UnityTimer/releases
 
 /// <summary>
 /// Allows you to run events on a delay without the use of <see cref="Coroutine"/>s

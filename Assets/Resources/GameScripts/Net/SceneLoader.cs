@@ -20,6 +20,13 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 根据场景名加载场景。
+    /// </summary>
+    /// <param name="_sceneName">场景名。</param>
+    /// <param name="_assetBundleName">AssetBundleName.</param>
+    /// <param name="_onUpdate">更新回调。</param>
+    /// <param name="_onComplete">完成回调。</param>
     public void LoadScene(string _sceneName, string _assetBundleName, EVENT_DEL_VOID_FLOAT _onUpdate, Action _onComplete)
     {
 #if UNITY_EDITOR
@@ -31,6 +38,13 @@ public class SceneLoader : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// 加载时的协程。
+    /// </summary>
+    /// <param name="_sceneName">场景名。</param>
+    /// <param name="_onUpdate">更新回调。</param>
+    /// <param name="_onComplete">完成回调。</param>
+    /// <returns></returns>
     private IEnumerator Load(string _sceneName, EVENT_DEL_VOID_FLOAT _onUpdate, Action _onComplete)
     {
         asyncOperation = SceneManager.LoadSceneAsync(_sceneName);

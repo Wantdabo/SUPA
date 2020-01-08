@@ -8,6 +8,7 @@ public class Lua
     private static Lua lua;
     private LuaEnv luaEnv;
     private TextAsset textAsset;
+    private EventBox eventBox;
 
     private LuaFunction startFunc;
     private LuaFunction handleEventFunc;
@@ -27,7 +28,7 @@ public class Lua
     {
         get
         {
-            return Instance.luaEnv;
+            return luaEnv;
         }
     }
 
@@ -53,8 +54,10 @@ public class Lua
         startFunc.Call();
     }
 
-    public void SendEvent(EventBox _eventBox)
+    public void SendEvent(string _eventID, string _eventKey)
     {
-        handleEventFunc.Call(_eventBox);
+        eventBox.eventID = _eventID;
+        eventBox.eventKey = _eventKey;
+        handleEventFunc.Call(eventBox);
     }
 }

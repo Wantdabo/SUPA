@@ -5,7 +5,6 @@ public class AssetPool
     private static AssetPool assetPool;
     private AssetPoolBox assetPoolBox;
     private string[] keys;
-    // Object Pool.
     private Dictionary<string, AssetPoolBox> assetBoxPools;
 
     public static AssetPool Instance
@@ -25,30 +24,30 @@ public class AssetPool
     }
 
     /// <summary>
-    /// Check If The Object Pool Has.
+    /// 检查池子里面是否存在。
     /// </summary>
-    /// <param name="_assetBundleName">AssetBundleName</param>
-    /// <returns>Has True, Empty False.</returns>
+    /// <param name="_assetBundleName">AssetBundleName.</param>
+    /// <returns>布尔值，是否存在。</returns>
     public bool Has(string _assetBundleName)
     {
         return assetBoxPools.ContainsKey(_assetBundleName);
     }
 
     /// <summary>
-    /// Get AssetBox By AssetBundleName.
+    /// 根据 AssetBundleName 获取 AssetBox.
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
-    /// <returns>AssetBox</returns>
+    /// <returns>AssetBox.</returns>
     public AssetBox Get(string _assetBundleName)
     {
         return assetBoxPools[_assetBundleName].assetBox;
     }
 
     /// <summary>
-    /// Add AssetBox to Object Pool.
+    /// 将 AssetBox 添加至池子。
     /// </summary>
     /// <param name="_assetBox">AssetBox.</param>
-    /// <param name="_recyclePri">GC PRI, Default SCENE_GC</param>
+    /// <param name="_recyclePri">GC 权限，默认过场景清。</param>
     public void Add(AssetBox _assetBox, RECYCLEPRI _recyclePri = RECYCLEPRI.SCENE_GC)
     {
         assetPoolBox.assetBundlename = _assetBox.assetBundleName;
@@ -58,7 +57,7 @@ public class AssetPool
     }
 
     /// <summary>
-    /// Remove AssetBox Form Object Pool By AssetBundleName.
+    /// 根据 AssetBundleName 从池子中移除该 AssetBox.
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
     /// <returns>Success true, Fail False.</returns>
@@ -68,9 +67,9 @@ public class AssetPool
     }
 
     /// <summary>
-    /// GC Object Pool By GC PRI.
+    /// GC 方法。
     /// </summary>
-    /// <param name="_recyclePri">GC PRI.</param>
+    /// <param name="_recyclePri">GC 权限。</param>
     public void GC(RECYCLEPRI _recyclePri)
     {
         keys = new string[assetBoxPools.Keys.Count];
@@ -87,10 +86,10 @@ public class AssetPool
     }
 
     /// <summary>
-    /// 卸载 AssetBundle.
+    /// 根据 AssetBundleName 卸载资源。
     /// </summary>
     /// <param name="_key">AssetBundleName.</param>
-    /// <param name="_force">卸载所有，如果为 true，实例出来的 GameObject 会受到影响，默认为 false.</param>
+    /// <param name="_force">实例出来的 GameObject 都会受到影响。</param>
     public void UnLoadAssetBundle(string _key, bool _force = false)
     {
 #if !UNITY_EDITOR

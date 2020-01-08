@@ -6,7 +6,6 @@ public class Main : MonoBehaviour
 {
     [SerializeField]
     public Transform uiRoot;
-
     [SerializeField]
     public Transform uiSound;
 
@@ -25,8 +24,7 @@ public class Main : MonoBehaviour
 
     private void Start()
     {
-        Object[] objs = GameObject.FindObjectsOfType<GameObject>();
-        foreach (Object obj in objs)
+        foreach (Object obj in GameObject.FindObjectsOfType<GameObject>())
             DontDestroyOnLoad(obj);
 
         AddComponent();

@@ -14,7 +14,7 @@ public class ADAssetReader : AssetReader
             return Get(_assetBundleName);
 
         path = Utils.AssetBundleNameToPath(_assetBundleName);
-        obj = AssetDatabase.LoadAssetAtPath(path, typeof(Object));
+        obj = AssetDatabase.LoadAssetAtPath<Object>(path);
         assetBox.name = obj.name;
         assetBox.assetBundleName = _assetBundleName;
         assetBox.path = path;
