@@ -5,13 +5,14 @@ function MainView:Ctor()
 end
 
 function MainView:LoadCallBack()
-	self.color_strength = 3.5
+	self.color_strength = 0.35
 	self.cells = {}
-	self.load_scene_demo_event =  EventManager:Add(Event.LOAD_SCENE, function(event) self:LoadScene(event.eventKey) end)
+	self.load_scene_demo_event = EventManager:Add(Event.LOAD_SCENE, function(event) self:LoadScene(event.eventKey) end)
 	for i = 1, 3 do
 		-- 特殊格子才需要继承重写
-		-- self.cells[#self.cells + 1] = MainViewCell.New(self.cell_org, self.cell_grid)
-		self.cells[#self.cells + 1] = BaseCell.New(self.cell_org, self.cell_grid)
+		-- self.cells[i] = MainViewCell.New()
+		self.cells[i] = BaseCell.New()
+		self.cells[i]:Bind(self.cell_org, self.cell_grid)
 	end
 end
 
