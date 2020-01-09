@@ -5,8 +5,14 @@ function MainView:Ctor()
 end
 
 function MainView:LoadCallBack()
+	self.color_strength = 3.5
 	self.cells = {}
 	self.load_scene_demo_event =  EventManager:Add(Event.LOAD_SCENE, function(event) self:LoadScene(event.eventKey) end)
+	for i = 1, 3 do
+		-- 特殊格子才需要继承重写
+		-- self.cells[#self.cells + 1] = MainViewCell.New(self.cell_org, self.cell_grid)
+		self.cells[#self.cells + 1] = BaseCell.New(self.cell_org, self.cell_grid)
+	end
 end
 
 function MainView:OpenCallBack()
@@ -20,15 +26,9 @@ function MainView:OpenCallBack()
 end
 
 function MainView:OnFlush()
-	-- 先这样写，抽空增加 Cell 类
-	local cell
-	local strength = 0.35
-	for i = 1, 3 do
-		-- 特殊格子才需要继承重写
-		-- cell = MainViewCell.New(self.cell_org, self.cell_grid)
-		cell = BaseCell.New(self.cell_org, self.cell_grid)
-		cell.name.text = i
-		cell.icon.color = Color(i * strength, i * strength, i * strength, 1)
+	for k, v in ipairs(self.cells) do
+		v.name.text = k
+		v.icon.color = Color(k * self.color_strength, k * self.color_strength, k * self.color_strength, 1)
 	end
 end
 

@@ -1,7 +1,7 @@
 require("game/turntable/turntable_view")
 require("game/turntable/turntable_data")
 
-TurntableCtrl = TurntableCtrl or BaseClass(BaseCtrl)
+TurntableCtrl = TurntableCtrl or BaseClass()
 
 function TurntableCtrl:Ctor()
 	self.view = TurntableView.New(View.TurntableView)

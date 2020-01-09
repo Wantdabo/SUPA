@@ -1,7 +1,7 @@
 require("game/role_exp/role_exp_view")
 require("game/role_exp/role_exp_data")
 
-RoleExpCtrl = RoleExpCtrl or BaseClass(BaseCtrl)
+RoleExpCtrl = RoleExpCtrl or BaseClass()
 
 function RoleExpCtrl:Ctor()
 	self.view = RoleExpView.New(View.RoleExpView)
