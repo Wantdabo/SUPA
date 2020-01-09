@@ -1,1 +1,12 @@
 BaseCell = BaseCell or BaseClass(BaseUI)
+
+function BaseCell:Ctor(obj, ...)
+	if ... ~= nil then
+		local params = {...}
+		self:Bind(params[1], params[2])
+	end
+end
+
+function BaseCell:HandleUICallBack(callback)
+	callback()
+end

@@ -1,34 +1,55 @@
 BaseUI = BaseUI or BaseClass()
 
-function BaseUI:HandleUI(asset_box, callback)
-	self.prefab = Instantiate(asset_box.obj)
-	self.variables = self.prefab.transform:GetComponent(typeof(VariableTable)).Variables
-	for k, v in pairs(self.variables) do
-		self[k] = v
+function BaseUI:HandleUI(obj, callback)
+	self.prefab = Instantiate(obj)
+	self.variables = self.prefab.transform:GetComponent(typeof(VariableTable))
+	if self.variables ~= nil then
+		for k, v in pairs(self.variables.Variables) do
+			self[k] = v
+		end
 	end
 	self:HandleUICallBack(callback)
 end
 
-function BaseUI:HandleUICallBack()
+function BaseUI:Bind(obj, parent, callback)
+	self:HandleUI(obj, function()
+		if parent ~= nil then
+			Utils:SetParent(parent, self.prefab)
+		end
+		self:LoadCallBack()
+		if callback ~= nil then
+			callback()
+		end
+	end)
 end
 
 function BaseUI:Load(asset_name, callback)
-	AssetLoader:LoadAsset(self.view_name, function(asset_box)
-		self:HandleUI(asset_box, callback)
+	AssetLoader:LoadAsset(asset_name, function(asset_box)
+		self:HandleUI(asset_box.obj, function()
+			self:LoadCallBack()
+			if callback ~= nil then
+				callback()
+			end
+		end)
 	end)
 end
 
 function BaseUI:Release()
 	Destroy(self.prefab)
 	self.prefab = nil
-	for k, v in pairs(self.variables) do
-		self[k] = nil
+	if self.variables.Variables ~= nil then
+		for k, v in pairs(self.variables.Variables) do
+			self[k] = nil
+		end
 	end
 	self:ReleaseCallBack()
 end
 
 function BaseUI:Flush()
 	self:OnFlush()
+end
+
+function BaseUI:HandleUICallBack()
 end
 
 function BaseUI:LoadCallBack()

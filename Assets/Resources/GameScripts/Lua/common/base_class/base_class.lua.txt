@@ -17,7 +17,8 @@ function BaseClass(super)
 
 	obj.New = function(...)
 		BaseCtor(obj, obj, ...)
-		return obj
+		
+		return BaseClass(obj)
 	end
 	setmetatable(obj, super)
 

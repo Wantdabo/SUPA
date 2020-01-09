@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224383242071589714}
   - component: {fileID: 222453102225363690}
   - component: {fileID: 114404452636954988}
+  - component: {fileID: 114781552367172700}
   m_Layer: 5
   m_Name: ItemCell
   m_TagString: Untagged
@@ -149,6 +150,26 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Cell
+--- !u!114 &114781552367172700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1062800309556386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717fec947b1893849a20aa6f47d18c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableTables:
+  - name: icon
+    type: 0
+    component: {fileID: 114472797489431400}
+    gameObject: {fileID: 0}
+  - name: name
+    type: 0
+    component: {fileID: 114593766486759782}
+    gameObject: {fileID: 0}
 --- !u!222 &222453102225363690
 CanvasRenderer:
   m_ObjectHideFlags: 1

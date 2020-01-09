@@ -10,10 +10,7 @@ function BaseView:HandleUICallBack(callback)
 	Utils:SetParent(UIRoot, self.prefab)
 	self.canvas_scaler = self.prefab.transform:GetComponent(typeof(CanvasScaler))
 	self.canvas_group = self.prefab.transform:GetComponent(typeof(CanvasGroup))
-	self:LoadCallBack()
-	if callback ~= nil then
-		callback()
-	end
+	callback()
 end
 
 function BaseView:Open(view_name)
