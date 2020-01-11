@@ -1,27 +1,24 @@
 function BaseClass(super)
-	local super = super
-	if super ~= nil then
-		super.__index = super
-	else
-		super = {}
-		super.Ctor = function(obj, ...) end
-		super.Dtor = function(obj, ...) end
-		super.__index = super
-	end
+	local obj = {}
+	obj.super = super
 
-	local obj = {
-		Ctor = function(obj, ...) end,
-		Dtor = function(obj, ...) end,
-		super = super
-	}
+	if obj.super == nil then
+		obj.super = {
+			Ctor = function(obj, ...) end,
+			Dtor = function(obj, ...) end,
+		}
+	end
+	obj.super.__index = obj.super
 
 	obj.New = function(...)
-		obj = BaseClass(obj)
-		BaseCtor(obj, obj, ...)
+		local self = {New = nil}
+		setmetatable(self, {__index = obj})
+		
+		BaseCtor(self, obj, ...)
 
-		return obj
+		return self
 	end
-	setmetatable(obj, super)
+	setmetatable(obj, obj.super)
 
 	return obj
 end
