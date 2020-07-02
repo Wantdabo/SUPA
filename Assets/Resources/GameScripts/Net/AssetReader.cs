@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public abstract class AssetReader
 {
@@ -18,7 +20,7 @@ public abstract class AssetReader
     /// </summary>
     /// <param name="_assetBundleName">AssetBundleName.</param>
     /// <param name="_callback">加载完成后的回调。</param>
-    public abstract void LoadAsync(string _assetBundleName, EVENT_DEL_VOID_ASSETBOX _callback);
+    public abstract void LoadAsync(string _assetBundleName, Action<AssetBox> _callback);
 
     /// <summary>
     /// 同步加载，子类实现。

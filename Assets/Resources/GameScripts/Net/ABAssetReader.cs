@@ -1,16 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ABAssetReader : AssetReader
 {
     private AssetBundleCreateRequest assetBundleCreateRequest;
-    private Dictionary<string, List<EVENT_DEL_VOID_ASSETBOX>> waitingDict;
-    private List<EVENT_DEL_VOID_ASSETBOX> eventList;
+    private Dictionary<string, List<Action<AssetBox>>> waitingDict;
+    private List<Action<AssetBox>> eventList;
 
     public ABAssetReader()
     {
-        waitingDict = new Dictionary<string, List<EVENT_DEL_VOID_ASSETBOX>>();
+        waitingDict = new Dictionary<string, List<Action<AssetBox>>>();
     }
 
     public override AssetBox LoadSync(string _assetBundleName)
@@ -24,7 +25,7 @@ public class ABAssetReader : AssetReader
         return assetBox;
     }
 
-    public override void LoadAsync(string _assetBundleName, EVENT_DEL_VOID_ASSETBOX _callback)
+    public override void LoadAsync(string _assetBundleName, Action<AssetBox> _callback)
     {
         if (Has(_assetBundleName))
         {
@@ -37,7 +38,7 @@ public class ABAssetReader : AssetReader
         }
         else
         {
-            eventList = new List<EVENT_DEL_VOID_ASSETBOX>
+            eventList = new List<Action<AssetBox>>
             {
                 _callback
             };
@@ -61,7 +62,7 @@ public class ABAssetReader : AssetReader
         eventList = waitingDict[_assetBox.assetBundleName];
         waitingDict.Remove(_assetBox.assetBundleName);
 
-        foreach (EVENT_DEL_VOID_ASSETBOX even in eventList)
+        foreach (Action<AssetBox> even in eventList)
         {
             even(_assetBox);
         }

@@ -27,7 +27,7 @@ public class SceneLoader : MonoBehaviour
     /// <param name="_assetBundleName">AssetBundleName.</param>
     /// <param name="_onUpdate">更新回调。</param>
     /// <param name="_onComplete">完成回调。</param>
-    public void LoadScene(string _sceneName, string _assetBundleName, EVENT_DEL_VOID_FLOAT _onUpdate, Action _onComplete)
+    public void LoadScene(string _sceneName, string _assetBundleName, Action<float> _onUpdate, System.Action _onComplete)
     {
 #if UNITY_EDITOR
         StartCoroutine(Load(_sceneName, _onUpdate, _onComplete));
@@ -45,7 +45,7 @@ public class SceneLoader : MonoBehaviour
     /// <param name="_onUpdate">更新回调。</param>
     /// <param name="_onComplete">完成回调。</param>
     /// <returns></returns>
-    private IEnumerator Load(string _sceneName, EVENT_DEL_VOID_FLOAT _onUpdate, Action _onComplete)
+    private IEnumerator Load(string _sceneName, Action<float> _onUpdate, System.Action _onComplete)
     {
         asyncOperation = SceneManager.LoadSceneAsync(_sceneName);
         while (!asyncOperation.isDone)

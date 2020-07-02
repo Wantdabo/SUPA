@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -133,7 +134,7 @@ public class Utils
     /// <param name="_endValue">结束值。</param>
     /// <param name="_duration">补间的时间长度。</param>
     /// <param name="_onComplete">补间结束的回调。</param>
-    public static void TweenValue(EVENT_DEL_VOID_FLOAT _callback, float _startValue, float _endValue, float _duration, TweenCallback _onComplete = null)
+    public static void TweenValue(Action<float> _callback, float _startValue, float _endValue, float _duration, TweenCallback _onComplete = null)
     {
         Tweener tw = DOTween.To((value) => { _callback(value);}, _startValue, _endValue, _duration);
         if (_onComplete != null)

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using Object = UnityEngine.Object;
 
 public class ADAssetReader : AssetReader
 {
@@ -24,7 +26,7 @@ public class ADAssetReader : AssetReader
         return assetBox;
     }
 
-    public override void LoadAsync(string _assetBundleName, EVENT_DEL_VOID_ASSETBOX _callback)
+    public override void LoadAsync(string _assetBundleName, Action<AssetBox> _callback)
     {
         throw new System.NotImplementedException();
     }

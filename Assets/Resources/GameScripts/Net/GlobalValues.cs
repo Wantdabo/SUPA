@@ -18,11 +18,6 @@ public enum RECYCLEPRI
     DONT_GC
 }
 
-[CSharpCallLua]
-public delegate void EVENT_DEL_VOID_ASSETBOX(AssetBox _assetBox);
-[CSharpCallLua]
-public delegate void EVENT_DEL_VOID_FLOAT(float _value);
-
 public struct EventBox {
     public string eventID;
     public string eventKey;
@@ -35,12 +30,6 @@ public struct AssetBox
     public string assetBundleName;
     public Object obj;
     public AssetBundle assetBundle;
-}
-
-public struct AssetAsyncBox
-{
-    public string name;
-    public string path;
 }
 
 public struct AssetPoolBox
@@ -73,12 +62,12 @@ public class GlobalValues
     public static string STR_PREFAB_BUNDLES = "PrefabBundles";
     public static string STR_MAIN_LUA = "Main";
     #endregion
+
     #region LUA FUNC DEFINE
     public static string FUNC_START = "Start";
     public static string FUNC_HANDLE_EVENT = "HandleEvent";
     #endregion
-    #region LUA EVENT DEFINE
-    #endregion
+
     #region PATH DEFINE
     public static string PATH_LUA = "GameScripts/Lua/";
     public static string PATH_EXPORT_AB = string.Format("AssetBundles/{0}/", GET_AB_FLOOR_NAME);

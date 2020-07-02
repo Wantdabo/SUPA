@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class AssetLoader
         }
     }
 
-    public void LoadAsset(string _assetBundleName, EVENT_DEL_VOID_ASSETBOX _callback)
+    public void LoadAsset(string _assetBundleName, Action<AssetBox> _callback)
     {
 #if UNITY_EDITOR
         _callback(assetReader.LoadSync(_assetBundleName));
