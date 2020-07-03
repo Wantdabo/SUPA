@@ -88,7 +88,7 @@ namespace XLua.CSObjectWrap
                 {
                     string __sceneName = LuaAPI.lua_tostring(L, 2);
                     string __assetBundleName = LuaAPI.lua_tostring(L, 3);
-                    EVENT_DEL_VOID_FLOAT __onUpdate = translator.GetDelegate<EVENT_DEL_VOID_FLOAT>(L, 4);
+                    System.Action<float> __onUpdate = translator.GetDelegate<System.Action<float>>(L, 4);
                     System.Action __onComplete = translator.GetDelegate<System.Action>(L, 5);
                     
                     gen_to_be_invoked.LoadScene( __sceneName, __assetBundleName, __onUpdate, __onComplete );

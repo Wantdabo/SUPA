@@ -71,7 +71,7 @@ namespace XLua.CSObjectWrap
                 
                 {
                     string __assetBundleName = LuaAPI.lua_tostring(L, 2);
-                    EVENT_DEL_VOID_ASSETBOX __callback = translator.GetDelegate<EVENT_DEL_VOID_ASSETBOX>(L, 3);
+                    System.Action<AssetBox> __callback = translator.GetDelegate<System.Action<AssetBox>>(L, 3);
                     
                     gen_to_be_invoked.LoadAsset( __assetBundleName, __callback );
                     

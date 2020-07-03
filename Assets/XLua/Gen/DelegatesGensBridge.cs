@@ -69,14 +69,14 @@ namespace XLua
 		public override Delegate GetDelegateByType(Type type)
 		{
 		
-		    if (type == typeof(EVENT_DEL_VOID_ASSETBOX))
+		    if (type == typeof(System.Action<AssetBox>))
 			{
-			    return new EVENT_DEL_VOID_ASSETBOX(__Gen_Delegate_Imp0);
+			    return new System.Action<AssetBox>(__Gen_Delegate_Imp0);
 			}
 		
-		    if (type == typeof(EVENT_DEL_VOID_FLOAT))
+		    if (type == typeof(System.Action<float>))
 			{
-			    return new EVENT_DEL_VOID_FLOAT(__Gen_Delegate_Imp1);
+			    return new System.Action<float>(__Gen_Delegate_Imp1);
 			}
 		
 		    return null;
