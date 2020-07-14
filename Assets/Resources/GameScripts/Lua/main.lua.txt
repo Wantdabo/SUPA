@@ -31,6 +31,11 @@ require("common/base_class/base_ui")
 require("common/base_class/base_view")
 require("common/base_class/base_cell")
 
+function Start()
+	LoadGameCtrl()
+	ViewManager:Open(View.MainView)
+end
+
 function LoadGameCtrl()
 	local require_list = require("require_list")
 	for _, v in ipairs(require_list) do
@@ -48,11 +53,6 @@ function LoadGameCtrl()
 	MainViewCtrl.New()
 	RoleExpCtrl.New()
 	TurntableCtrl.New()
-end
-
-function Start()
-	LoadGameCtrl()
-	ViewManager:Open(View.MainView)
 end
 
 function HandleEvent(event)
